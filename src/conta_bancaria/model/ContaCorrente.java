@@ -17,11 +17,13 @@ public class ContaCorrente extends Conta{
 	}
 	@Override
 	public boolean sacar(float valor) {
-		if(this.getSaldo() < valor) {
+		if(this.getSaldo() + this.getLimite() < valor) {
+			System.out.println("\n Saldo Insuficiente!");
 			return false; //Não bem sucedida
 		}
+		
 		this.setSaldo(this.getSaldo() - valor);
-		return true; //Operação bem sucessida
+		return true;//Operação bem sucessida
 	}
 	
 	@Override
