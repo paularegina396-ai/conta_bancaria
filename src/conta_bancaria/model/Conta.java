@@ -1,6 +1,6 @@
 package conta_bancaria.model;
 
-public class Conta {
+public abstract class Conta {
 	/*Atributos da Classe*/
 	private int numero;
 	private int agencia;
@@ -56,6 +56,7 @@ public class Conta {
 		this.saldo -= valor;
 		return true; //Operação bem sucessida
 	}
+	///////
 	public void depositar(float valor) {
 		this.saldo += valor;
 	}
