@@ -40,6 +40,7 @@ public class Menu {
 		System.out.println("                6 - Sacar                                    ");
 		System.out.println("                7 - Depositar                                ");
 		System.out.println("                8 - Transferir valores entre Contas          ");
+		System.out.println("                9 - Listar por Nome do Titular               ");
 		System.out.println("                0 - Sair                                     ");
 		System.out.println("*************************************************************");
 		System.out.println("Entre com a opção desejada:                                  ");
@@ -91,14 +92,22 @@ public class Menu {
 			break;
 		case 6:
 			System.out.println(Cores.TEXT_WHITE + "Sacar");
+			sacar();
 			keyPress();
 			break;
 		case 7:
 			System.out.println(Cores.TEXT_WHITE + "Depositar");
+			depositar();
 			keyPress();
 			break;
 		case 8:
 			System.out.println(Cores.TEXT_WHITE + "Transferir Valores");
+			transferir();
+			keyPress();
+			break;
+		case 9:
+			System.out.println(Cores.TEXT_WHITE + "Consulta por Nome do Titular");
+			listarPorTitular();
 			keyPress();
 			break;
 		default:
@@ -136,7 +145,8 @@ public class Menu {
 		int agencia = leia.nextInt();
 		
 		System.out.println("Digite o nome do titular da agência: ");
-		String titular = leia.next();
+		leia.skip("\\R");
+		String titular = leia.nextLine();
 		
 		System.out.println("Digite o tipo da conta (1 - CC | 2 - CP): ");
 		int tipo = leia.nextInt();
@@ -265,6 +275,57 @@ public class Menu {
 		System.out.println(Cores.TEXT_RESET + "\n\nPressione Enter para continuar...");
 		leia.nextLine();
 	}
+	
+	//Metodo sacar
+	public static void sacar() {
+		System.out.println("Digite o número da conta: ");
+		int numero = leia.nextInt();//Faz a leitura do n da conta que queremos pesquisar
+		
+		System.out.println("Digite o valor do saque: ");
+		float valor = leia.nextFloat();
+		
+		//Chamar função sacar
+		contaController.sacar(numero, valor);
+		
+	}
+	
+	public static void depositar() {
+		System.out.println("Digite o número da conta: ");
+		int numero = leia.nextInt();//Faz a leitura do n da conta que queremos pesquisar
+		
+		System.out.println("Digite o valor do deposito: ");
+		float valor = leia.nextFloat();
+		leia.nextLine();
+		//Chamar função depositar
+		contaController.depositar(numero, valor);
+		
+	}
+	
+	public static void transferir() {
+		System.out.println("Digite o número da conta de origem: ");
+		int numeroOrigem = leia.nextInt();//Faz a leitura do n da conta que queremos pesquisar
+		System.out.println("Digite o número da conta de destino: ");
+		int numeroDestino = leia.nextInt();//Faz a leitura da 2 conta
+		
+		System.out.println("Digite o valor da trasnferência: ");
+		float valor = leia.nextFloat();
+		leia.nextLine();
+		//Chamar função depositar
+		contaController.transferir(numeroOrigem, numeroDestino, valor); //metodo
+		
+	}
+	//Método listarpor titular
+	public static void listarPorTitular(){
+		System.out.println("Digite o nome do titular: ");
+		//leia.skip("\\R");
+		String titular = leia.nextLine();//Faz a leitura do n da conta que queremos pesquisar
+		leia.nextLine();
+		contaController.listarPorTitular(titular);
+	}
+	
+	
+	
+	
 		
 	}
 
